@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Thu, 18 Aug 2022 17:29:29 +0300</lastBuildDate><atom:link href="https://mylh.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Aug 2022 22:10:00 +0300</lastBuildDate><atom:link href="https://mylh.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>internet</title>
+      <link>https://mylh.me/tags/internet/</link>
+      <pubDate>Sun, 21 Aug 2022 22:10:00 +0300</pubDate>
+      
+      <guid>https://mylh.me/tags/internet/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>datascience</title>
       <link>https://mylh.me/tags/datascience/</link>
