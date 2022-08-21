@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Dmitry&#39;s Website</title>
+    <link>https://mylh.me/tags/</link>
+    <description>Recent content in Tags on Dmitry&#39;s Website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Dmitry S. aka mylh</copyright>
+    <lastBuildDate>Thu, 18 Aug 2022 17:29:29 +0300</lastBuildDate><atom:link href="https://mylh.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>datascience</title>
+      <link>https://mylh.me/tags/datascience/</link>
+      <pubDate>Thu, 18 Aug 2022 17:29:29 +0300</pubDate>
+      
+      <guid>https://mylh.me/tags/datascience/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
