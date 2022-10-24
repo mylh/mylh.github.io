@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Sun, 21 Aug 2022 22:10:00 +0300</lastBuildDate><atom:link href="https://mylh.me/tags/internet/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Oct 2022 12:00:00 +0400</lastBuildDate><atom:link href="https://mylh.me/tags/internet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Georginify - Firefox Extension to learn Georgian</title>
+      <link>https://mylh.me/posts/georginify-extension/</link>
+      <pubDate>Mon, 24 Oct 2022 12:00:00 +0400</pubDate>
+      
+      <guid>https://mylh.me/posts/georginify-extension/</guid>
+      <description>Due to the war in Ukraine I recently moved to Georgia and the first big issue I faced was Georgian alphabet. They don&amp;rsquo;t use Latin or Cyrillic charaters so I needed to learn it to be able to read and study Georgian language. To say the truth I always liked their characters - they are really nice, looke for your self: ყოველთვის მომწონდა ქართული ანბანი :) But for an unprepared person, they are almost indistinguishable from each other.</description>
+    </item>
+    
     <item>
       <title>Why I Stopped Using Facebook</title>
       <link>https://mylh.me/posts/delete-facebook/</link>
