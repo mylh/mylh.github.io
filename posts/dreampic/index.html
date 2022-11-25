@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>DreamPic.AI - AI Generated Pictures Starring You - Dmitry&#39;s Website</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="I made a tool to generate pictures of yourself with AI in different styles." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="DreamPic.AI - AI Generated Pictures Starring You" />
+<meta property="og:description" content="I made a tool to generate pictures of yourself with AI in different styles." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mylh.me/posts/dreampic/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-24T12:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-24T12:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DreamPic.AI - AI Generated Pictures Starring You"/>
+<meta name="twitter:description" content="I made a tool to generate pictures of yourself with AI in different styles."/>
+<script src="https://mylh.me/js/feather.min.js"></script>
+	
+	
+        <link href="https://mylh.me/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://mylh.me/css/main.ac08a4c9714baa859217f92f051deb58df2938ec352b506df655005dcaf98cc0.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://mylh.me/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css"  disabled />
+	
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://mylh.me/">Dmitry&#39;s Website</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		| <a id="dark-mode-toggle" onclick="toggleTheme()" href=""></a>
+		<script src="https://mylh.me/js/themetoggle.js"></script>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">DreamPic.AI - AI Generated Pictures Starring You</h1>
+			<div class="meta">
+                          
+                          
+                        </div>
+		</div>
+		
+
+		<section class="body">
+			<p>For over a year I have been siletnly playing with neural networks. Artificial Intelligence is definitely the future of humanity if it survives and neural networks is the most promising piece of technology leading us there. My main area of interests besides general AI lies in joining music and AI and so I was playing with it but there are no any great results yet to share. And recently there was a really revolutionary thing happened - a <a href="https://stability.ai/">group of researchers</a> released <a href="https://stability.ai/blog/stable-diffusion-public-release">Stable Diffusion</a> - a neural network capable of generating images given a textual prompt. Why it was revolutionary? Because it is going to change all graphical design industry and many more related industries and how people work. All history of human graphical art and expression is compressed into several gigabytes of neural network model that you can freely download and run on your machine to generate never exited before artworks. What people do with SD is mind blowing. And one of such things is training SD with pictures of a person so it is capable of producing new pictures of that person in literally every context. This is where my new project starts.</p>
+<p>I saw how other people doing similar projects online. First one was <a href="https://twitter.com/levelsio">@levelsio</a> with his AvatarAI project. By the way it was a great success of him he managed to do over 100000$ of sales for over a week selling AI generated avatars. So I was motivated enough to try. After trying the model on <a href="https://colab.research.google.com/drive/1m3GW6cqKAGagV040JpHFmh4he-OGeoXH">colab</a> I had so much fun that decided that anyone who ever tried to create its own pictures in any kind of style will have the same feelings of joy and fun and there are place for any number of similar projects on the internet.</p>
+<p>So I built my version - <a href="https://dreampic.ai">DreamPic.AI</a> The algorithm that is used to train Stable Diffusion is called <a href="https://dreambooth.github.io/">DreamBooth</a>, so this was where the name came from. On the other hand it means you can create any picture of your dreams. I hope everyone likes how cool it came.</p>
+<p>I had great fun and joy implementing this project for many reasons. First - I never took any AI model to production before, now I have experience and moreover I have my own engine to deploy any kind of models to production. So any new AI project will be made much faster by me. I don&rsquo;t use any API or service to host a model rather I created a library and command line utility that can provision servers at Google Cloud with the desired parameters, GPU, etc. This server then fully automatically configured to handle model training. And it is used to train model and generate new pictures.</p>
+<p>Second - I did major update in my tech stack. Now it includes most recent version of Django, React, Bootstrap or Tailwind CSS, Docker based development environment with ready to use Redis, Celery, Vite, Emacs integration scripts, Ansible deployment scripts and many more libs and packages. I changed how I run projects in production. It was uwsgi and now it is gunicorn. I always deployed Postgres, now I use sqlite. I&rsquo;ve been using supervior, now I use systemd. Major simplification and major upgrade in clarity. From years of experience I concluded that all that complex things are only needed when they are really needed. No need to complicate things from the beginning. It took significant time to integrate everything, but again now when I want to start a new project I just take all these boilerplate and can start implementing new ideas in minutes.</p>
+<p>Project is running 1 week. Unfortunately I don&rsquo;t have 200k followers on twitter so only around 100 people visited my website since launch and I didn&rsquo;t made any sales. But I haven&rsquo;t had so much fun coding for very long. I couldn&rsquo;t sleep well because all free time I have I used to work on it. And I have so many more ideas to try to implement not for the sake of making money but for fun of creation and exploring something fascinating and <strong>because I can, so why not</strong> :)</p>
+<p>Below are some pictures of me generated by the AI:</p>
+<p><img src="1.png" alt="png"></p>
+<p><img src="2.png" alt="png"></p>
+<p><img src="3.png" alt="png"></p>
+<p><img src="4.png" alt="png"></p>
+<p><img src="5.png" alt="png"></p>
+<p>By the way since you are reading this don&rsquo;t hesitate to create your <a href="https://dreampic.ai">Dream Pic</a></p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/tags/indiehacking">indiehacking</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://twitter.com/dima7" title="Twitter"><i data-feather="twitter"></i></a>
+    <a class="border"></a><a class="soc" href="https://github.com/mylh" title="GitHub"><i data-feather="github"></i></a>
+    <a class="border"></a></div>
+  <div class="footer-info">
+    2022  © Dmitry S. aka mylh |  Based on <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
+<script>
+  feather.replace()
+</script></div>
+    </body>
+</html>

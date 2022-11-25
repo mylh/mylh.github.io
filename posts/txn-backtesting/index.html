@@ -68,22 +68,22 @@
 <h2 id="what-is-txn-backtesting">What Is TXN Backtesting</h2>
 <p>TXN stands for Transaction check - which is a monitoring tool that executes several action steps in headless Chrome instance on our check servers. We support 26 different step types (commands and validations) that allows our customers to simulate user flows on their websites to ensure that everything works as expected.</p>
 <p>We call backtesting a procedure of checking new versions of our software (or chrome version upgrades) using real clients&rsquo; checks (scripts). During this procedure we run checks using old and new versions and compare results. Ideally results (OK/Not OK) in the new and old versions should be the same.</p>
-<p>Why we need backtesting? Aren&rsquo;t regression tests enough? Appears not. We have such tests that checks each step type on our synthetic examples and sometimes they miss bugs which are detected by backtesting. Second issue that can be missed by our tests is backward comatibility of the new versions. Sometimes new versions introduce slight changes in how our steps work and this can result in false positives alerts to our clients which we want to avoid at all costs.</p>
+<p>Why we need backtesting? Aren&rsquo;t regression tests enough? Appears not. We have such tests that checks each step type on our synthetic examples and sometimes they miss bugs which are detected by backtesting. Second issue that can be missed by our tests is backward compatibility of the new versions. Sometimes new versions introduce slight changes in how our steps work and this can result in false positives alerts to our clients which we want to avoid at all costs.</p>
 <p>Ideally we would want to test all existing clients&rsquo; checks for every new release, but practically this is not possible since there are too much checks and backtesting will take too much time. So we do backtesting only on some randomly selected subset of checks. Question is how many checks we need to backtest to be sure there are no errors?</p>
 <p>So our goal is to formalize approach of selecting the number of checks we need to backtest. We want to answer one of the following questions:</p>
 <ul>
 <li>How much checks we need to backtest to be sure that there is no errors with the certain level of probability or</li>
-<li>If we test <code>X</code> checks what is the probability that tere is no errors</li>
+<li>If we test <code>X</code> checks what is the probability that there are no errors</li>
 </ul>
 <h2 id="probability-of-missing-an-error">Probability of missing an Error</h2>
-<p>Let&rsquo;s caclulate probability of missing an error when it is there using simulations</p>
+<p>Let&rsquo;s calculate probability of missing an error when it is there using simulations</p>
 <p>Let</p>
 <ul>
 <li><code>N</code> is the total number of checks we have</li>
 <li><code>M</code> is the number of checks that have error</li>
 </ul>
-<p>We are going to run our backtesting simulation: we will randomly choose elements from our checks and see if there are any broken ones. We run this procedure many times and the calcualte ratio of how many times we successfully
-detected broken checks to the total number of runs. This will be our probablitiy of detecting bugs via backtesting.</p>
+<p>We are going to run our backtesting simulation: we will randomly choose elements from our checks and see if there are any broken ones. We run this procedure many times and the calculate ratio of how many times we successfully
+detected broken checks to the total number of runs. This will be our probability of detecting bugs via backtesting.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
 </span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>matplotlib inline
@@ -104,8 +104,8 @@ detected broken checks to the total number of runs. This will be our probablitiy
 </span></span><span style="display:flex;"><span>simulate(N, M, backtest_size)
 </span></span></code></pre></div><pre><code>0.0511
 </code></pre>
-<p>So what we have here is the probablity of detecting an error running backtest on 100 checks out of 1852 in case there is a single error in all checks.</p>
-<p>Let&rsquo;s see how this probablity changes if we increase the number of checks we are backtesting</p>
+<p>So what we have here is the probability of detecting an error running backtest on 100 checks out of 1852 in case there is a single error in all checks.</p>
+<p>Let&rsquo;s see how this probability changes if we increase the number of checks we are backtesting</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> backtest_size <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1852</span>, <span style="color:#ae81ff">100</span>):
@@ -118,7 +118,7 @@ detected broken checks to the total number of runs. This will be our probablitiy
 </span></span></code></pre></div><p><img src="output_8_0.png" alt="png"></p>
 <p>So we can see that to catch a single error with probability more than 90% we need to backtest almost all checks.</p>
 <p>This was very specific edge case when error occurs only in a single check. In reality when we introduce an error in the new version of software usually many checks got broken. How to estimate?</p>
-<p>Our checks consist of a number of steps and each step can be only of a certain type. There are only 26 different step types. Let&rsquo;s assume we&rsquo;ve introduced an error only in 1 step and that all steps are uniformly distributes over all checks we have (in reality of course there are popupalar and less popular steps), then the number of broken checks will be N/26</p>
+<p>Our checks consist of a number of steps and each step can be only of a certain type. There are only 26 different step types. Let&rsquo;s assume we&rsquo;ve introduced an error only in 1 step and that all steps are uniformly distributes over all checks we have (in reality of course there are popular and less popular steps), then the number of broken checks will be N/26</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M <span style="color:#f92672">=</span> N <span style="color:#f92672">//</span> <span style="color:#ae81ff">26</span>
 </span></span><span style="display:flex;"><span>M
 </span></span></code></pre></div><pre><code>76
@@ -134,7 +134,7 @@ detected broken checks to the total number of runs. This will be our probablitiy
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
 </span></span></code></pre></div><p><img src="output_13_0.png" alt="png"></p>
 <p>We see that at <strong>100 checks we have more than 95% probability</strong> of detecting a failure, when there is an error on any step that affects all checks. Thinking a bit we realize that this number is also not very practical. There are errors that can affect checks partially. So we need to come up with another condition.</p>
-<p>Since we really care about false alarms we can set a reasonable threshold of how many false alarms are acceptable and manageable by our support department. After internal consultations we decided that 1% of fals alarms is OK for us. Let see what numbers this gives us.</p>
+<p>Since we really care about false alarms we can set a reasonable threshold of how many false alarms are acceptable and manageable by our support department. After internal consultations we decided that 1% of false alarms is OK for us. Let see what numbers this gives us.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M <span style="color:#f92672">=</span> int(N <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.01</span>)
 </span></span><span style="display:flex;"><span>M
 </span></span></code></pre></div><pre><code>20
@@ -149,7 +149,7 @@ detected broken checks to the total number of runs. This will be our probablitiy
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
 </span></span></code></pre></div><p><img src="output_16_0.png" alt="png"></p>
-<p>We see that between 250 and 500 checks we achieve the desired level of confidence. Let&rsquo;s write a function that can find the number more preciesly by running several simulaions adjusting backtest size on each iteration to make our probability to be close to the desired confidence value with defined prescision</p>
+<p>We see that between 250 and 500 checks we achieve the desired level of confidence. Let&rsquo;s write a function that can find the number more precisely by running several simulations adjusting backtest size on each iteration to make our probability to be close to the desired confidence value with defined precision</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sample_size_finder</span>(N, M, start<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, confidence<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, prescision<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>, num_experiments<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, verbose<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
 </span></span><span style="display:flex;"><span>    delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">-</span> confidence
 </span></span><span style="display:flex;"><span>    prev_delta <span style="color:#f92672">=</span> delta
@@ -194,11 +194,11 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 
 300
 </code></pre>
-<p>What percent of inital population is it?</p>
+<p>What percent of initial population is it?</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">300</span> <span style="color:#f92672">/</span> M
 </span></span></code></pre></div><pre><code>15.0
 </code></pre>
-<p>Let&rsquo;s explore how backtest size changes when total numbed ot checks changes, but the desired percent of failed checks stays constant and equal 1%</p>
+<p>Let&rsquo;s explore how backtest size changes when total numbed of checks changes, but the desired percent of failed checks stays constant and equal 1%</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Pool, cpu_count
 </span></span><span style="display:flex;"><span>
@@ -216,7 +216,11 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(res, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Population&#39;</span>, <span style="color:#e6db74">&#39;Sample size&#39;</span>, <span style="color:#e6db74">&#39;Ratio&#39;</span>])
 </span></span><span style="display:flex;"><span>df
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -225,8 +229,86 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Population</th>
+      <th>Sample size</th>
+      <th>Ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1000</td>
+      <td>250</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10000</td>
+      <td>300</td>
+      <td>0.030000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20000</td>
+      <td>300</td>
+      <td>0.015000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30000</td>
+      <td>300</td>
+      <td>0.010000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40000</td>
+      <td>300</td>
+      <td>0.007500</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50000</td>
+      <td>300</td>
+      <td>0.006000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>60000</td>
+      <td>300</td>
+      <td>0.005000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>70000</td>
+      <td>300</td>
+      <td>0.004286</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>80000</td>
+      <td>300</td>
+      <td>0.003750</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>90000</td>
+      <td>300</td>
+      <td>0.003333</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>100000</td>
+      <td>300</td>
+      <td>0.003000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>Interesting - appears that number of checks we need to test doesn&rsquo;t changes at all and after 300 checks we can be sure that no more than 1% of total checks can fail.</p>
 <p>Now lets keep constant absolute number of checks we allow to fail and see how our sample size changes</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
@@ -246,7 +328,11 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(res, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Population&#39;</span>, <span style="color:#e6db74">&#39;Sample size&#39;</span>, <span style="color:#e6db74">&#39;Ratio&#39;</span>])
 </span></span><span style="display:flex;"><span>df
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -255,8 +341,86 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Population</th>
+      <th>Sample size</th>
+      <th>Ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1000</td>
+      <td>250</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10000</td>
+      <td>1300</td>
+      <td>0.130000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20000</td>
+      <td>2700</td>
+      <td>0.135000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30000</td>
+      <td>3900</td>
+      <td>0.130000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40000</td>
+      <td>5900</td>
+      <td>0.147500</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50000</td>
+      <td>7100</td>
+      <td>0.142000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>60000</td>
+      <td>7900</td>
+      <td>0.131667</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>70000</td>
+      <td>9500</td>
+      <td>0.135714</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>80000</td>
+      <td>11100</td>
+      <td>0.138750</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>90000</td>
+      <td>12700</td>
+      <td>0.141111</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>100000</td>
+      <td>13500</td>
+      <td>0.135000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>Let&rsquo;s look at 1 million checks, how many checks we need to backtest to make sure only 20 can fail, guessing that according with previous result the number should be around 15%</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> []
@@ -275,7 +439,11 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 </span></span><span style="display:flex;"><span>    res<span style="color:#f92672">.</span>append((n, p))
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(res, columns<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;Probability&#39;</span>))
 </span></span><span style="display:flex;"><span>df
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -284,15 +452,120 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>N</th>
+      <th>Probability</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10000</td>
+      <td>0.9624</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15000</td>
+      <td>0.9653</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20000</td>
+      <td>0.9651</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>25000</td>
+      <td>0.9617</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30000</td>
+      <td>0.9575</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>35000</td>
+      <td>0.9609</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>40000</td>
+      <td>0.9637</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>45000</td>
+      <td>0.9582</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>50000</td>
+      <td>0.9613</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>55000</td>
+      <td>0.9593</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>60000</td>
+      <td>0.9595</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>65000</td>
+      <td>0.9624</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>70000</td>
+      <td>0.9607</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>75000</td>
+      <td>0.9607</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>80000</td>
+      <td>0.9613</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>85000</td>
+      <td>0.9590</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>90000</td>
+      <td>0.9622</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>95000</td>
+      <td>0.9603</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100_000</span>, <span style="color:#ae81ff">1_000_000</span>, <span style="color:#ae81ff">100_000</span>):
 </span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> simulate(n, <span style="color:#ae81ff">20</span>, int(n<span style="color:#f92672">*</span><span style="color:#ae81ff">0.15</span>))
 </span></span><span style="display:flex;"><span>    res<span style="color:#f92672">.</span>append((n, p))
 </span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(res, columns<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;Probability&#39;</span>))
 </span></span><span style="display:flex;"><span>df
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -301,11 +574,67 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>N</th>
+      <th>Probability</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100000</td>
+      <td>0.9577</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>200000</td>
+      <td>0.9646</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>300000</td>
+      <td>0.9621</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>400000</td>
+      <td>0.9596</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>500000</td>
+      <td>0.9614</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>600000</td>
+      <td>0.9643</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>700000</td>
+      <td>0.9612</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>800000</td>
+      <td>0.9626</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>900000</td>
+      <td>0.9601</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>As we can see 15% of population works good for small and large populations up to 1 million.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>With no less than 95% probablilty we can backtest:</p>
+<p>With no less than 95% probability we can backtest:</p>
 <ul>
 <li>300 checks to be sure than no more than 1% can fail or</li>
 <li>15% of total checks to allow no more than 20 checks to fail</li>

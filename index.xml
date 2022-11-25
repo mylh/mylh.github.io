@@ -7,23 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Mon, 24 Oct 2022 12:00:00 +0400</lastBuildDate><atom:link href="https://mylh.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Nov 2022 01:00:00 +0000</lastBuildDate><atom:link href="https://mylh.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Projects</title>
+      <link>https://mylh.me/posts/my-projects/</link>
+      <pubDate>Fri, 25 Nov 2022 01:00:00 +0000</pubDate>
+      
+      <guid>https://mylh.me/posts/my-projects/</guid>
+      <description>I can say that I&amp;rsquo;m a serial maker. From my early days on the Internet I try to create various online projects. When I do work for someone else I can&amp;rsquo;t say that every time I do the most interesting things out there, and this is where my side projects help me to keep going: I can learn whatever technology I want, I can do whatever I want in a way I want :) So it benefits a lot.</description>
+    </item>
+    
+    <item>
+      <title>DreamPic.AI - AI Generated Pictures Starring You</title>
+      <link>https://mylh.me/posts/dreampic/</link>
+      <pubDate>Thu, 24 Nov 2022 12:00:00 +0000</pubDate>
+      
+      <guid>https://mylh.me/posts/dreampic/</guid>
+      <description>For over a year I have been siletnly playing with neural networks. Artificial Intelligence is definitely the future of humanity if it survives and neural networks is the most promising piece of technology leading us there. My main area of interests besides general AI lies in joining music and AI and so I was playing with it but there are no any great results yet to share. And recently there was a really revolutionary thing happened - a group of researchers released Stable Diffusion - a neural network capable of generating images given a textual prompt.</description>
+    </item>
+    
     <item>
       <title>Georginify - Firefox Extension to learn Georgian</title>
       <link>https://mylh.me/posts/georginify-extension/</link>
       <pubDate>Mon, 24 Oct 2022 12:00:00 +0400</pubDate>
       
       <guid>https://mylh.me/posts/georginify-extension/</guid>
-      <description>Due to the war in Ukraine I recently moved to Georgia and the first big issue I faced was Georgian alphabet. They don&amp;rsquo;t use Latin or Cyrillic charaters so I needed to learn it to be able to read and study Georgian language. To say the truth I always liked their characters - they are really nice, looke for your self: ყოველთვის მომწონდა ქართული ანბანი :) But for an unprepared person, they are almost indistinguishable from each other.</description>
-    </item>
-    
-    <item>
-      <title>My Projects</title>
-      <link>https://mylh.me/posts/my-projects/</link>
-      <pubDate>Mon, 24 Oct 2022 09:00:00 +0400</pubDate>
-      
-      <guid>https://mylh.me/posts/my-projects/</guid>
-      <description>I can say that I&amp;rsquo;m a serial maker. From my early days in the Internet I try to create online projects with the ultimate goal to became independent in terms of work and finance. When I work for someone else I can&amp;rsquo;t say that every time I do the most interesting things out there, and this is where my side projects helps me to keep going: I can learn whatever technology I want, I can do whatever I want in a way I want :) So it benefits a lot.</description>
+      <description>Due to the war in Ukraine I recently moved to Georgia and the first big issue I faced was Georgian alphabet. They don&amp;rsquo;t use Latin or Cyrillic characters so I needed to learn it to be able to read and study Georgian language. To say the truth I always liked their characters - they are really nice, look for your self: ყოველთვის მომწონდა ქართული ანბანი :) But for an unprepared person, they are almost indistinguishable from each other.</description>
     </item>
     
     <item>
@@ -32,7 +41,7 @@
       <pubDate>Sun, 21 Aug 2022 22:10:00 +0300</pubDate>
       
       <guid>https://mylh.me/posts/delete-facebook/</guid>
-      <description>I was an ordinary Facebook user, not very social one - had a handful of &amp;ldquo;friends&amp;rdquo;, almost never posted or liked anything, mostly consumed newsfeed of people and groups I was subscribed to. I had an Instagram account where shared private photos with my friends. And I used Whatsapp as my primary messenger to communicate with everyone - family, friends, colleagues and other people I know.
+      <description>I was an ordinary Facebook user, not very social one - had a handful of &amp;ldquo;friends&amp;rdquo;, almost never posted or liked anything, mostly consumed news feed of people and groups I was subscribed to. I had an Instagram account where shared private photos with my friends. And I used WhatsApp as my primary messenger to communicate with everyone - family, friends, colleagues and other people I know.
 All was good for many years.</description>
     </item>
     
