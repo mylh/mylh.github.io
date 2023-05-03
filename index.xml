@@ -7,14 +7,33 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Fri, 25 Nov 2022 01:00:00 +0000</lastBuildDate><atom:link href="https://mylh.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 May 2023 01:00:00 +0000</lastBuildDate><atom:link href="https://mylh.me/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Projects</title>
       <link>https://mylh.me/posts/my-projects/</link>
-      <pubDate>Fri, 25 Nov 2022 01:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 May 2023 01:00:00 +0000</pubDate>
       
       <guid>https://mylh.me/posts/my-projects/</guid>
       <description>I can say that I&amp;rsquo;m a serial maker. From my early days on the Internet I try to create various online projects. When I do work for someone else I can&amp;rsquo;t say that every time I do the most interesting things out there, and this is where my side projects help me to keep going: I can learn whatever technology I want, I can do whatever I want in a way I want :) So it benefits a lot.</description>
+    </item>
+    
+    <item>
+      <title>ChatGPT Name Generator</title>
+      <link>https://mylh.me/posts/chatgpt-name-generator/</link>
+      <pubDate>Tue, 02 May 2023 12:00:00 +0400</pubDate>
+      
+      <guid>https://mylh.me/posts/chatgpt-name-generator/</guid>
+      <description>Supercharge Your Startup Naming Process with ChatGPT &amp;amp; Domain Availability Checker As indie hackers and entrepreneurs, we all know that coming up with the perfect name for our startups can be a daunting task. We&amp;rsquo;ve all been there, spending days or even weeks brainstorming names and searching for available domain names. But what if I told you that you can now generate dozens of creative names and find available domains in just minutes?</description>
+    </item>
+    
+    <item>
+      <title>IndieHacker Boilerplate (Django Template)</title>
+      <link>https://mylh.me/posts/indiehacker-boilerplate/</link>
+      <pubDate>Tue, 14 Feb 2023 12:00:00 +0400</pubDate>
+      
+      <guid>https://mylh.me/posts/indiehacker-boilerplate/</guid>
+      <description>Hi fellow indiehackers. I created a template project to quickly hop into a new project journey if you build with python, django and react and want to share it with you. https://github.com/mylh/indiehacker-boilerplate It&amp;rsquo;s opensource and under MIT license. I hope it will save some time for you.
+I created many projects over the years and every time I had to repeat same boring steps before can actually start implementing a new idea.</description>
     </item>
     
     <item>
