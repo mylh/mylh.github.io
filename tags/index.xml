@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Dmitry&#39;s Website</title>
+    <title>Tags on Dmitry&#39;s Notes</title>
     <link>https://mylh.me/tags/</link>
-    <description>Recent content in Tags on Dmitry&#39;s Website</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Tags on Dmitry&#39;s Notes</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Wed, 03 May 2023 01:00:00 +0000</lastBuildDate><atom:link href="https://mylh.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© Dmitry Mylh</copyright>
+    <lastBuildDate>Tue, 26 Nov 2024 18:00:00 +0100</lastBuildDate>
+    <atom:link href="https://mylh.me/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>indiehacking</title>
+      <title>Business</title>
+      <link>https://mylh.me/tags/business/</link>
+      <pubDate>Tue, 26 Nov 2024 18:00:00 +0100</pubDate>
+      <guid>https://mylh.me/tags/business/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Indiehacking</title>
       <link>https://mylh.me/tags/indiehacking/</link>
-      <pubDate>Wed, 03 May 2023 01:00:00 +0000</pubDate>
-      
+      <pubDate>Tue, 26 Nov 2024 18:00:00 +0100</pubDate>
       <guid>https://mylh.me/tags/indiehacking/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>internet</title>
+      <title>Internet</title>
       <link>https://mylh.me/tags/internet/</link>
       <pubDate>Sun, 21 Aug 2022 22:10:00 +0300</pubDate>
-      
       <guid>https://mylh.me/tags/internet/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>datascience</title>
+      <title>Datascience</title>
       <link>https://mylh.me/tags/datascience/</link>
       <pubDate>Thu, 18 Aug 2022 17:29:29 +0300</pubDate>
-      
       <guid>https://mylh.me/tags/datascience/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>datascience on Dmitry&#39;s Website</title>
+    <title>Datascience on Dmitry&#39;s Notes</title>
     <link>https://mylh.me/tags/datascience/</link>
-    <description>Recent content in datascience on Dmitry&#39;s Website</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Datascience on Dmitry&#39;s Notes</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Thu, 18 Aug 2022 17:29:29 +0300</lastBuildDate><atom:link href="https://mylh.me/tags/datascience/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© Dmitry Mylh</copyright>
+    <lastBuildDate>Thu, 18 Aug 2022 17:29:29 +0300</lastBuildDate>
+    <atom:link href="https://mylh.me/tags/datascience/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Probabilistic Simulation for QA</title>
       <link>https://mylh.me/posts/txn-backtesting/</link>
       <pubDate>Thu, 18 Aug 2022 17:29:29 +0300</pubDate>
-      
       <guid>https://mylh.me/posts/txn-backtesting/</guid>
-      <description>How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting.
-What Is TXN Backtesting TXN stands for Transaction check - which is a monitoring tool that executes several action steps in headless Chrome instance on our check servers.</description>
+      <description>&lt;p&gt;How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-txn-backtesting&#34;&gt;What Is TXN Backtesting&lt;/h2&gt;&#xA;&lt;p&gt;TXN stands for Transaction check - which is a monitoring tool that executes several action steps in headless Chrome instance on our check servers. We support 26 different step types (commands and validations) that allows our customers to simulate user flows on their websites to ensure that everything works as expected.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

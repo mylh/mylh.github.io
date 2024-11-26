@@ -1,88 +1,69 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dmitry&#39;s Website</title>
+    <title>Dmitry&#39;s Notes</title>
     <link>https://mylh.me/</link>
-    <description>Recent content on Dmitry&#39;s Website</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content on Dmitry&#39;s Notes</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Wed, 03 May 2023 01:00:00 +0000</lastBuildDate><atom:link href="https://mylh.me/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© Dmitry Mylh</copyright>
+    <lastBuildDate>Tue, 26 Nov 2024 18:00:00 +0100</lastBuildDate>
+    <atom:link href="https://mylh.me/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Projects</title>
       <link>https://mylh.me/posts/my-projects/</link>
-      <pubDate>Wed, 03 May 2023 01:00:00 +0000</pubDate>
-      
+      <pubDate>Tue, 26 Nov 2024 18:00:00 +0100</pubDate>
       <guid>https://mylh.me/posts/my-projects/</guid>
-      <description>I can say that I&amp;rsquo;m a serial maker. From my early days on the Internet I try to create various online projects. When I do work for someone else I can&amp;rsquo;t say that every time I do the most interesting things out there, and this is where my side projects help me to keep going: I can learn whatever technology I want, I can do whatever I want in a way I want :) So it benefits a lot.</description>
+      <description>&lt;p&gt;I can say that I&amp;rsquo;m a serial maker and entrepreneur by spirit. From my early days on the Internet I try to create various online projects and convert them into stable businesses. When I do work for someone else (freelance, contractor jobs) I can&amp;rsquo;t say that every time I do the most interesting things out there, and this is where my ventures help me to keep going: I can learn whatever technology I want, I can do whatever I want in a way I want :) So it benefits a lot. Here is an incomplete (I hope) list of my projects. If a project generated revenue I put a $ sign corresponding to each digit in the total revenue for the project. ✝ - means project is discontinued.&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>About</title>
+      <link>https://mylh.me/about/</link>
+      <pubDate>Tue, 26 Nov 2024 17:55:57 +0100</pubDate>
+      <guid>https://mylh.me/about/</guid>
+      <description>&lt;img src=&#34;./photo.jpg&#34; width=&#34;300&#34; height=&#34;428&#34; style=&#34;float: right; margin-left: 2em; margin-bottom: 2em;&#34; title=&#34;After running to the top of a mountain in Tbilisi, Georgia&#34;&gt;&#xA;&lt;p&gt;Hi, I am Dmitry - a father of three, programmer, entrepreneur and music lover.&lt;/p&gt;&#xA;&lt;h2 id=&#34;my-profession&#34;&gt;My Profession&lt;/h2&gt;&#xA;&lt;p&gt;I write computer programs since 1990s and enjoy this activity so much that it became my main work for a lifetime. Worked with many languages - C/C++, Java, PHP, Haskell and others but fall in love with Python for its power to implement my ideas in fastest way possible. My second favorite language is Go, when I need to do a task that requires super high performance this is the language of my choice.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>ChatGPT Name Generator</title>
       <link>https://mylh.me/posts/chatgpt-name-generator/</link>
       <pubDate>Tue, 02 May 2023 12:00:00 +0400</pubDate>
-      
       <guid>https://mylh.me/posts/chatgpt-name-generator/</guid>
-      <description>Supercharge Your Startup Naming Process with ChatGPT &amp;amp; Domain Availability Checker As indie hackers and entrepreneurs, we all know that coming up with the perfect name for our startups can be a daunting task. We&amp;rsquo;ve all been there, spending days or even weeks brainstorming names and searching for available domain names. But what if I told you that you can now generate dozens of creative names and find available domains in just minutes?</description>
+      <description>&lt;h2 id=&#34;supercharge-your-startup-naming-process-with-chatgpt--domain-availability-checker&#34;&gt;Supercharge Your Startup Naming Process with ChatGPT &amp;amp; Domain Availability Checker&lt;/h2&gt;&#xA;&lt;p&gt;As indie hackers and entrepreneurs, we all know that coming up with the perfect name for our startups can be a daunting task. We&amp;rsquo;ve all been there, spending days or even weeks brainstorming names and searching for available domain names. But what if I told you that you can now generate dozens of creative names and find available domains in just minutes? Sounds too good to be true, right? Well, not anymore! Introducing the Startup Name Generator with ChatGPT and Domain Availability Checker, a utility I built to make this process easier and faster than ever before.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>IndieHacker Boilerplate (Django Template)</title>
       <link>https://mylh.me/posts/indiehacker-boilerplate/</link>
       <pubDate>Tue, 14 Feb 2023 12:00:00 +0400</pubDate>
-      
       <guid>https://mylh.me/posts/indiehacker-boilerplate/</guid>
-      <description>Hi fellow indiehackers. I created a template project to quickly hop into a new project journey if you build with python, django and react and want to share it with you. https://github.com/mylh/indiehacker-boilerplate It&amp;rsquo;s opensource and under MIT license. I hope it will save some time for you.
-I created many projects over the years and every time I had to repeat same boring steps before can actually start implementing a new idea.</description>
+      <description>&lt;p&gt;Hi fellow indiehackers. I created a template project to quickly hop into a new project journey if you build with python, django and react and want to share it with you. &lt;a href=&#34;https://github.com/mylh/indiehacker-boilerplate&#34;&gt;https://github.com/mylh/indiehacker-boilerplate&lt;/a&gt; It&amp;rsquo;s opensource and under MIT license. I hope it will save some time for you.&lt;/p&gt;&#xA;&lt;p&gt;I created many projects over the years and every time I had to repeat same boring steps before can actually start implementing a new idea. But not anymore from now. With this template you literally can start implementing your idea in minutes. Just start a new django project with django-admin startproject and after running docker-compose up you&amp;rsquo;ll have a complete website, as well as ansible deployments script to put it into production.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>DreamPic.AI - AI Generated Pictures Starring You</title>
       <link>https://mylh.me/posts/dreampic/</link>
       <pubDate>Thu, 24 Nov 2022 12:00:00 +0000</pubDate>
-      
       <guid>https://mylh.me/posts/dreampic/</guid>
-      <description>For over a year I have been siletnly playing with neural networks. Artificial Intelligence is definitely the future of humanity if it survives and neural networks is the most promising piece of technology leading us there. My main area of interests besides general AI lies in joining music and AI and so I was playing with it but there are no any great results yet to share. And recently there was a really revolutionary thing happened - a group of researchers released Stable Diffusion - a neural network capable of generating images given a textual prompt.</description>
+      <description>&lt;p&gt;For over a year I have been siletnly playing with neural networks. Artificial Intelligence is definitely the future of humanity if it survives and neural networks is the most promising piece of technology leading us there. My main area of interests besides general AI lies in joining music and AI and so I was playing with it but there are no any great results yet to share. And recently there was a really revolutionary thing happened - a &lt;a href=&#34;https://stability.ai/&#34;&gt;group of researchers&lt;/a&gt; released &lt;a href=&#34;https://stability.ai/blog/stable-diffusion-public-release&#34;&gt;Stable Diffusion&lt;/a&gt; - a neural network capable of generating images given a textual prompt. Why it was revolutionary? Because it is going to change all graphical design industry and many more related industries and how people work. All history of human graphical art and expression is compressed into several gigabytes of neural network model that you can freely download and run on your machine to generate never exited before artworks. What people do with SD is mind blowing. And one of such things is training SD with pictures of a person so it is capable of producing new pictures of that person in literally every context. This is where my new project starts.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Georginify - Firefox Extension to learn Georgian</title>
       <link>https://mylh.me/posts/georginify-extension/</link>
       <pubDate>Mon, 24 Oct 2022 12:00:00 +0400</pubDate>
-      
       <guid>https://mylh.me/posts/georginify-extension/</guid>
-      <description>Due to the war in Ukraine I recently moved to Georgia and the first big issue I faced was Georgian alphabet. They don&amp;rsquo;t use Latin or Cyrillic characters so I needed to learn it to be able to read and study Georgian language. To say the truth I always liked their characters - they are really nice, look for your self: ყოველთვის მომწონდა ქართული ანბანი :) But for an unprepared person, they are almost indistinguishable from each other.</description>
+      <description>&lt;p&gt;Due to the war in Ukraine I recently moved to Georgia and the first big issue I faced was Georgian alphabet. They don&amp;rsquo;t use Latin or Cyrillic characters so I needed to learn it to be able to read and study Georgian language. To say the truth I always liked their characters - they are really nice, look for your self: ყოველთვის მომწონდა ქართული ანბანი :) But for an unprepared person, they are almost indistinguishable from each other.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Why I Stopped Using Facebook</title>
       <link>https://mylh.me/posts/delete-facebook/</link>
       <pubDate>Sun, 21 Aug 2022 22:10:00 +0300</pubDate>
-      
       <guid>https://mylh.me/posts/delete-facebook/</guid>
-      <description>I was an ordinary Facebook user, not very social one - had a handful of &amp;ldquo;friends&amp;rdquo;, almost never posted or liked anything, mostly consumed news feed of people and groups I was subscribed to. I had an Instagram account where shared private photos with my friends. And I used WhatsApp as my primary messenger to communicate with everyone - family, friends, colleagues and other people I know.
-All was good for many years.</description>
+      <description>&lt;p&gt;I was an ordinary Facebook user, not very social one - had a handful of &amp;ldquo;friends&amp;rdquo;, almost never posted or liked anything, mostly consumed news feed of people and groups I was subscribed to. I had an Instagram account where shared private photos with my friends. And I used WhatsApp as my primary messenger to communicate with everyone - family, friends, colleagues and other people I know.&lt;/p&gt;&#xA;&lt;p&gt;All was good for many years. Until one evening I couldn&amp;rsquo;t log in to my Instagram account. It was blocked and I was requested to provide additional information including my real name and phone number to restore access to the account. I supplied all the information and went to bed.&lt;/p&gt;</description>
     </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://mylh.me/about/</link>
-      <pubDate>Fri, 19 Aug 2022 10:54:57 +0300</pubDate>
-      
-      <guid>https://mylh.me/about/</guid>
-      <description>Hi, I am Dmitry - a father of three, programmer and music lover.
-My Profession I write computer programs since 1990s and enjoy this activity so much that it became my main work for a lifetime. Worked with many languages - C/C++, Java, PHP, Haskell and others but fall in love with Python for its power to implement my ideas in fastest way possible. My second favorite language is Go, when I need to do a task that requires super high performance this is the language of my choice.</description>
-    </item>
-    
     <item>
       <title>Probabilistic Simulation for QA</title>
       <link>https://mylh.me/posts/txn-backtesting/</link>
       <pubDate>Thu, 18 Aug 2022 17:29:29 +0300</pubDate>
-      
       <guid>https://mylh.me/posts/txn-backtesting/</guid>
-      <description>How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting.
-What Is TXN Backtesting TXN stands for Transaction check - which is a monitoring tool that executes several action steps in headless Chrome instance on our check servers.</description>
+      <description>&lt;p&gt;How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-txn-backtesting&#34;&gt;What Is TXN Backtesting&lt;/h2&gt;&#xA;&lt;p&gt;TXN stands for Transaction check - which is a monitoring tool that executes several action steps in headless Chrome instance on our check servers. We support 26 different step types (commands and validations) that allows our customers to simulate user flows on their websites to ensure that everything works as expected.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

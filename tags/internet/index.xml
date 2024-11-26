@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>internet on Dmitry&#39;s Website</title>
+    <title>Internet on Dmitry&#39;s Notes</title>
     <link>https://mylh.me/tags/internet/</link>
-    <description>Recent content in internet on Dmitry&#39;s Website</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Internet on Dmitry&#39;s Notes</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <copyright>© Dmitry S. aka mylh</copyright>
-    <lastBuildDate>Sun, 21 Aug 2022 22:10:00 +0300</lastBuildDate><atom:link href="https://mylh.me/tags/internet/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© Dmitry Mylh</copyright>
+    <lastBuildDate>Sun, 21 Aug 2022 22:10:00 +0300</lastBuildDate>
+    <atom:link href="https://mylh.me/tags/internet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why I Stopped Using Facebook</title>
       <link>https://mylh.me/posts/delete-facebook/</link>
       <pubDate>Sun, 21 Aug 2022 22:10:00 +0300</pubDate>
-      
       <guid>https://mylh.me/posts/delete-facebook/</guid>
-      <description>I was an ordinary Facebook user, not very social one - had a handful of &amp;ldquo;friends&amp;rdquo;, almost never posted or liked anything, mostly consumed news feed of people and groups I was subscribed to. I had an Instagram account where shared private photos with my friends. And I used WhatsApp as my primary messenger to communicate with everyone - family, friends, colleagues and other people I know.
-All was good for many years.</description>
+      <description>&lt;p&gt;I was an ordinary Facebook user, not very social one - had a handful of &amp;ldquo;friends&amp;rdquo;, almost never posted or liked anything, mostly consumed news feed of people and groups I was subscribed to. I had an Instagram account where shared private photos with my friends. And I used WhatsApp as my primary messenger to communicate with everyone - family, friends, colleagues and other people I know.&lt;/p&gt;&#xA;&lt;p&gt;All was good for many years. Until one evening I couldn&amp;rsquo;t log in to my Instagram account. It was blocked and I was requested to provide additional information including my real name and phone number to restore access to the account. I supplied all the information and went to bed.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
