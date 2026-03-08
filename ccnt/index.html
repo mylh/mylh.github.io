@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ccnt - Calorie Counter</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1976d2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; color: #222; max-width: 480px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; }
+
+/* Header */
+.header { background: #fff; padding: 16px; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 10; }
+.header-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.cal-display { font-size: 28px; font-weight: 700; }
+.cal-display .limit { font-size: 18px; font-weight: 400; color: #888; }
+.edit-limit-btn { background: none; border: none; font-size: 18px; color: #888; cursor: pointer; padding: 4px 8px; }
+.progress-wrap { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 4px; transition: width 0.3s, background-color 0.3s; }
+.progress-green { background: #4caf50; }
+.progress-yellow { background: #ff9800; }
+.progress-red { background: #f44336; }
+
+/* Food list */
+.food-list { flex: 1; padding: 8px; }
+.food-item { background: #fff; border-radius: 10px; margin-bottom: 6px; display: flex; align-items: center; padding: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.food-item .btn { width: 48px; height: 48px; border: none; border-radius: 10px; font-size: 24px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.btn-minus { background: #ffebee; color: #f44336; }
+.btn-plus { background: #e8f5e9; color: #4caf50; }
+.btn-minus:active { background: #f44336; color: #fff; }
+.btn-plus:active { background: #4caf50; color: #fff; }
+.food-info { flex: 1; padding: 4px 10px; cursor: pointer; min-width: 0; }
+.food-name { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.food-meta { font-size: 12px; color: #888; margin-top: 2px; }
+.food-today { font-size: 13px; color: #4caf50; font-weight: 600; margin-top: 1px; }
+
+/* Footer */
+.footer { padding: 12px 8px 24px; }
+.add-btn { width: 100%; padding: 14px; background: #1976d2; color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; }
+.add-btn:active { background: #1565c0; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: flex-end; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: #fff; width: 100%; max-width: 480px; border-radius: 16px 16px 0 0; padding: 20px 16px 32px; max-height: 90dvh; overflow-y: auto; }
+.modal h2 { font-size: 18px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+.modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #888; padding: 4px 8px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 13px; color: #666; margin-bottom: 4px; }
+.field input { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+.field input:focus { outline: none; border-color: #1976d2; }
+.modal-actions { display: flex; gap: 8px; margin-top: 16px; }
+.modal-actions button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; }
+.btn-save { background: #1976d2; color: #fff; }
+.btn-delete { background: #ffebee; color: #f44336; }
+
+/* API search */
+.search-wrap { margin-bottom: 14px; }
+.search-row { display: flex; gap: 8px; }
+.search-row input { flex: 1; }
+.search-row button { padding: 10px 14px; background: #1976d2; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; white-space: nowrap; }
+.search-results { margin-top: 8px; }
+.search-result { padding: 10px; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 6px; cursor: pointer; font-size: 14px; }
+.search-result:active { background: #e3f2fd; }
+.search-result .sr-name { font-weight: 600; }
+.search-result .sr-cal { color: #888; font-size: 12px; }
+.search-fallback { font-size: 13px; color: #888; margin-top: 8px; }
+.search-fallback a { color: #1976d2; }
+.search-spinner { display: none; font-size: 13px; color: #888; margin-top: 8px; }
+
+/* Settings menu */
+.settings-item { display: flex; align-items: center; padding: 14px 4px; cursor: pointer; }
+.settings-item:active { background: #f5f5f5; }
+.settings-icon { font-size: 20px; width: 32px; text-align: center; flex-shrink: 0; }
+.settings-label { flex: 1; font-size: 15px; font-weight: 500; }
+.settings-chevron { color: #ccc; font-size: 18px; flex-shrink: 0; }
+.settings-divider { height: 1px; background: #e0e0e0; }
+
+/* Limit modal */
+.limit-modal .field { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-row">
+    <div class="cal-display"><span id="calCurrent">0</span> <span class="limit">/ <span id="calLimit">2000</span></span></div>
+    <button class="edit-limit-btn" onclick="openSettingsModal()" title="Settings">&#9881;</button>
+  </div>
+  <div class="progress-wrap"><div class="progress-bar progress-green" id="progressBar"></div></div>
+</div>
+
+<div class="food-list" id="foodList"></div>
+
+<div class="footer">
+  <button class="add-btn" onclick="openItemModal()">+ Add New Item</button>
+</div>
+
+<!-- Item Editor Modal -->
+<div class="modal-overlay" id="itemModal">
+  <div class="modal">
+    <h2><span id="modalTitle">New Item</span><button class="modal-close" onclick="closeItemModal()">&times;</button></h2>
+    <div class="search-wrap">
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Search food database..." enterkeyhint="search">
+        <button onclick="searchFood()">Search</button>
+      </div>
+      <div class="search-spinner" id="searchSpinner">Searching...</div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+    <div class="field">
+      <label>Name</label>
+      <input type="text" id="itemName" placeholder="e.g. Chicken Breast">
+    </div>
+    <div class="field">
+      <label>Portion size (grams)</label>
+      <input type="number" id="itemPortion" placeholder="150" inputmode="numeric">
+    </div>
+    <div class="field">
+      <label>Calories per 100g</label>
+      <input type="number" id="itemCal100" placeholder="165" inputmode="numeric">
+    </div>
+    <div class="field">
+      <label>Calories per portion (auto-calculated)</label>
+      <input type="number" id="itemCalPortion" placeholder="248" inputmode="numeric" readonly style="background:#f5f5f5;">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-delete" id="btnDeleteItem" onclick="deleteItem()" style="display:none">Delete</button>
+      <button class="btn-save" onclick="saveItem()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Daily Limit Modal -->
+<div class="modal-overlay" id="limitModal">
+  <div class="modal limit-modal">
+    <h2><span>Daily Calorie Limit</span><button class="modal-close" onclick="closeLimitModal()">&times;</button></h2>
+    <div class="field">
+      <label>Calories per day</label>
+      <input type="number" id="limitInput" inputmode="numeric">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-save" onclick="saveLimit()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <h2><span>Settings</span><button class="modal-close" onclick="closeSettingsModal()">&times;</button></h2>
+    <div class="settings-item" onclick="closeSettingsModal();openLimitModal()">
+      <div class="settings-icon">&#127919;</div>
+      <div class="settings-label">Daily Calorie Limit</div>
+      <div class="settings-chevron">&#8250;</div>
+    </div>
+    <div class="settings-divider"></div>
+    <div class="settings-item" onclick="exportData('items')">
+      <div class="settings-icon">&#128230;</div>
+      <div class="settings-label">Export Items</div>
+      <div class="settings-chevron">&#8250;</div>
+    </div>
+    <div class="settings-item" onclick="triggerImport('items')">
+      <div class="settings-icon">&#128229;</div>
+      <div class="settings-label">Import Items</div>
+      <div class="settings-chevron">&#8250;</div>
+    </div>
+    <div class="settings-divider"></div>
+    <div class="settings-item" onclick="exportData('log')">
+      <div class="settings-icon">&#128230;</div>
+      <div class="settings-label">Export Log</div>
+      <div class="settings-chevron">&#8250;</div>
+    </div>
+    <div class="settings-item" onclick="triggerImport('log')">
+      <div class="settings-icon">&#128229;</div>
+      <div class="settings-label">Import Log</div>
+      <div class="settings-chevron">&#8250;</div>
+    </div>
+    <input type="file" id="fileImport" accept=".json" style="display:none">
+  </div>
+</div>
+
+<script>
+// --- Data Layer ---
+const KEYS = { items: 'ccnt_items', log: 'ccnt_log', settings: 'ccnt_settings' };
+
+function load(key) { try { return JSON.parse(localStorage.getItem(key)) || null; } catch { return null; } }
+function save(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+
+function getSettings() { return load(KEYS.settings) || { dailyLimit: 2000 }; }
+function saveSettings(s) { save(KEYS.settings, s); }
+
+function getItems() { return load(KEYS.items) || []; }
+function saveItems(items) { save(KEYS.items, items); }
+
+function getLog() { return load(KEYS.log) || []; }
+function saveLog(log) { save(KEYS.log, log); }
+
+function genId() { return Math.random().toString(36).slice(2, 10); }
+function todayStr() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+
+// Prune log entries older than 30 days
+function pruneLog() {
+  const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  const log = getLog().filter(e => e.timestamp >= cutoff);
+  saveLog(log);
+}
+
+// --- Core Logic ---
+const MERGE_WINDOW = 10 * 60 * 1000; // 10 minutes
+
+function addPortion(itemId) {
+  const items = getItems();
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  const log = getLog();
+  const today = todayStr();
+  const now = Date.now();
+
+  // Find last log entry for this item today
+  const idx = findMergeableEntry(log, itemId, today, now);
+  if (idx >= 0) {
+    log[idx].portions += 1;
+    log[idx].totalCalories = log[idx].portions * log[idx].caloriesPerPortion;
+    log[idx].timestamp = now;
+  } else {
+    log.push({
+      id: genId(), date: today, timestamp: now,
+      itemId: item.id, itemName: item.name,
+      portions: 1, caloriesPerPortion: item.caloriesPerPortion,
+      totalCalories: item.caloriesPerPortion
+    });
+  }
+  saveLog(log);
+  render();
+}
+
+function removePortion(itemId) {
+  const log = getLog();
+  const today = todayStr();
+  const now = Date.now();
+
+  const idx = findMergeableEntry(log, itemId, today, now);
+  if (idx < 0) return;
+  log[idx].portions -= 1;
+  log[idx].timestamp = now;
+  if (log[idx].portions <= 0) {
+    log.splice(idx, 1);
+  } else {
+    log[idx].totalCalories = log[idx].portions * log[idx].caloriesPerPortion;
+  }
+  saveLog(log);
+  render();
+}
+
+function findMergeableEntry(log, itemId, today, now) {
+  // Find last entry for this item today within merge window
+  let best = -1;
+  for (let i = 0; i < log.length; i++) {
+    if (log[i].itemId === itemId && log[i].date === today && (now - log[i].timestamp) < MERGE_WINDOW) {
+      best = i;
+    }
+  }
+  return best;
+}
+
+function getTodayCalories() {
+  const today = todayStr();
+  return getLog().filter(e => e.date === today).reduce((sum, e) => sum + e.totalCalories, 0);
+}
+
+function getTodayPortions(itemId) {
+  const today = todayStr();
+  return getLog().filter(e => e.date === today && e.itemId === itemId).reduce((sum, e) => sum + e.portions, 0);
+}
+
+function getTodayCaloriesForItem(itemId) {
+  const today = todayStr();
+  return getLog().filter(e => e.date === today && e.itemId === itemId).reduce((sum, e) => sum + e.totalCalories, 0);
+}
+
+// --- Rendering ---
+function render() {
+  const settings = getSettings();
+  const items = getItems();
+  const log = getLog();
+  const freq = {};
+  log.forEach(e => { freq[e.itemId] = (freq[e.itemId] || 0) + 1; });
+  items.sort((a, b) => (freq[b.id] || 0) - (freq[a.id] || 0));
+  const current = getTodayCalories();
+  const limit = settings.dailyLimit;
+  const pct = limit > 0 ? (current / limit) * 100 : 0;
+
+  document.getElementById('calCurrent').textContent = current;
+  document.getElementById('calLimit').textContent = limit;
+
+  const bar = document.getElementById('progressBar');
+  bar.style.width = Math.min(pct, 100) + '%';
+  bar.className = 'progress-bar ' + (pct > 100 ? 'progress-red' : pct >= 80 ? 'progress-yellow' : 'progress-green');
+
+  const list = document.getElementById('foodList');
+  if (items.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:40px 16px;color:#aaa;">No food items yet.<br>Tap "+ Add New Item" to start.</div>';
+    return;
+  }
+
+  list.innerHTML = items.map(item => {
+    const todayP = getTodayPortions(item.id);
+    const todayCal = getTodayCaloriesForItem(item.id);
+    const todayLine = todayP > 0 ? `<div class="food-today">${todayP} &times; ${item.caloriesPerPortion} = ${todayCal} kcal</div>` : '';
+    return `<div class="food-item">
+      <button class="btn btn-minus" onclick="removePortion('${item.id}')">−</button>
+      <div class="food-info" onclick="openItemModal('${item.id}')">
+        <div class="food-name">${esc(item.name)}</div>
+        <div class="food-meta">${item.portionGrams}g · ${item.caloriesPer100g} kcal/100g · ${item.caloriesPerPortion} kcal/portion</div>
+        ${todayLine}
+      </div>
+      <button class="btn btn-plus" onclick="addPortion('${item.id}')">+</button>
+    </div>`;
+  }).join('');
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// --- Item Modal ---
+let editingItemId = null;
+
+function openItemModal(id) {
+  editingItemId = id || null;
+  document.getElementById('searchResults').innerHTML = '';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchSpinner').style.display = 'none';
+
+  if (editingItemId) {
+    const item = getItems().find(i => i.id === editingItemId);
+    if (!item) return;
+    document.getElementById('modalTitle').textContent = 'Edit Item';
+    document.getElementById('itemName').value = item.name;
+    document.getElementById('itemPortion').value = item.portionGrams;
+    document.getElementById('itemCal100').value = item.caloriesPer100g;
+    document.getElementById('itemCalPortion').value = item.caloriesPerPortion;
+    document.getElementById('btnDeleteItem').style.display = '';
+  } else {
+    document.getElementById('modalTitle').textContent = 'New Item';
+    document.getElementById('itemName').value = '';
+    document.getElementById('itemPortion').value = '';
+    document.getElementById('itemCal100').value = '';
+    document.getElementById('itemCalPortion').value = '';
+    document.getElementById('btnDeleteItem').style.display = 'none';
+  }
+  document.getElementById('itemModal').classList.add('open');
+}
+
+function closeItemModal() {
+  document.getElementById('itemModal').classList.remove('open');
+  editingItemId = null;
+}
+
+function saveItem() {
+  const name = document.getElementById('itemName').value.trim();
+  const portion = parseInt(document.getElementById('itemPortion').value) || 100;
+  const cal100 = parseInt(document.getElementById('itemCal100').value) || 0;
+  const calPortion = Math.round(cal100 * portion / 100);
+
+  if (!name) { document.getElementById('itemName').focus(); return; }
+
+  const items = getItems();
+  if (editingItemId) {
+    const item = items.find(i => i.id === editingItemId);
+    if (item) {
+      item.name = name;
+      item.portionGrams = portion;
+      item.caloriesPer100g = cal100;
+      item.caloriesPerPortion = calPortion;
+    }
+  } else {
+    items.push({ id: genId(), name, portionGrams: portion, caloriesPer100g: cal100, caloriesPerPortion: calPortion });
+  }
+  saveItems(items);
+  closeItemModal();
+  render();
+}
+
+function deleteItem() {
+  if (!editingItemId) return;
+  if (!confirm('Delete this item?')) return;
+  const items = getItems().filter(i => i.id !== editingItemId);
+  saveItems(items);
+  closeItemModal();
+  render();
+}
+
+// Auto-calc portion calories
+document.getElementById('itemPortion').addEventListener('input', calcPortion);
+document.getElementById('itemCal100').addEventListener('input', calcPortion);
+function calcPortion() {
+  const p = parseInt(document.getElementById('itemPortion').value) || 0;
+  const c = parseInt(document.getElementById('itemCal100').value) || 0;
+  document.getElementById('itemCalPortion').value = p && c ? Math.round(c * p / 100) : '';
+}
+
+// Search on Enter
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') searchFood();
+});
+
+// --- Limit Modal ---
+function openLimitModal() {
+  document.getElementById('limitInput').value = getSettings().dailyLimit;
+  document.getElementById('limitModal').classList.add('open');
+  document.getElementById('limitInput').focus();
+}
+function closeLimitModal() { document.getElementById('limitModal').classList.remove('open'); }
+function saveLimit() {
+  const v = parseInt(document.getElementById('limitInput').value) || 2000;
+  const s = getSettings(); s.dailyLimit = v; saveSettings(s);
+  closeLimitModal();
+  render();
+}
+document.getElementById('limitInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') saveLimit();
+});
+
+// --- Settings Modal ---
+function openSettingsModal() { document.getElementById('settingsModal').classList.add('open'); }
+function closeSettingsModal() { document.getElementById('settingsModal').classList.remove('open'); }
+
+// --- Export/Import ---
+function exportData(type) {
+  const key = type === 'items' ? KEYS.items : KEYS.log;
+  const data = load(key) || [];
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ccnt_${type}_${todayStr()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+let importType = null;
+function triggerImport(type) {
+  importType = type;
+  const input = document.getElementById('fileImport');
+  input.value = '';
+  input.click();
+}
+
+document.getElementById('fileImport').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file || !importType) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!Array.isArray(data)) { alert('Invalid file: expected a JSON array.'); return; }
+      const key = importType === 'items' ? KEYS.items : KEYS.log;
+      const merge = confirm('Merge with existing data?\n\nOK = Merge (add new entries)\nCancel = Replace (overwrite all)');
+      if (merge) {
+        const current = load(key) || [];
+        const existingIds = new Set(current.map(e => e.id));
+        const newEntries = data.filter(e => !existingIds.has(e.id));
+        save(key, current.concat(newEntries));
+      } else {
+        save(key, data);
+      }
+      render();
+      closeSettingsModal();
+    } catch { alert('Failed to parse JSON file.'); }
+  };
+  reader.readAsText(file);
+});
+
+// Close modals on overlay click
+document.getElementById('itemModal').addEventListener('click', function(e) { if (e.target === this) closeItemModal(); });
+document.getElementById('limitModal').addEventListener('click', function(e) { if (e.target === this) closeLimitModal(); });
+document.getElementById('settingsModal').addEventListener('click', function(e) { if (e.target === this) closeSettingsModal(); });
+
+// --- Nutrition API Search ---
+function searchFood() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+  const spinner = document.getElementById('searchSpinner');
+  const results = document.getElementById('searchResults');
+  spinner.style.display = 'block';
+  results.innerHTML = '';
+
+  fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=5`)
+    .then(r => r.json())
+    .then(data => {
+      spinner.style.display = 'none';
+      const products = (data.products || []).filter(p => p.product_name && p.nutriments && p.nutriments['energy-kcal_100g'] != null);
+      if (products.length === 0) {
+        results.innerHTML = `<div class="search-fallback">No results found. Try searching on:
+          <a href="https://www.google.com/search?q=${encodeURIComponent(q + ' calories per 100g')}" target="_blank" rel="noopener">Google</a> ·
+          <a href="https://chatgpt.com/?q=${encodeURIComponent('How many calories per 100g in ' + q)}" target="_blank" rel="noopener">ChatGPT</a></div>`;
+        return;
+      }
+      results.innerHTML = products.map(p => {
+        const cal = Math.round(p.nutriments['energy-kcal_100g']);
+        const name = p.product_name.slice(0, 60);
+        return `<div class="search-result" onclick="fillFromSearch('${esc(name.replace(/'/g, "\\'"))}', ${cal})">
+          <div class="sr-name">${esc(name)}</div>
+          <div class="sr-cal">${cal} kcal / 100g</div>
+        </div>`;
+      }).join('');
+    })
+    .catch(() => {
+      spinner.style.display = 'none';
+      results.innerHTML = `<div class="search-fallback">Search failed. Try:
+        <a href="https://www.google.com/search?q=${encodeURIComponent(q + ' calories per 100g')}" target="_blank" rel="noopener">Google</a> ·
+        <a href="https://chatgpt.com/?q=${encodeURIComponent('How many calories per 100g in ' + q)}" target="_blank" rel="noopener">ChatGPT</a></div>`;
+    });
+}
+
+function fillFromSearch(name, cal100) {
+  document.getElementById('itemName').value = name;
+  document.getElementById('itemCal100').value = cal100;
+  document.getElementById('searchResults').innerHTML = '';
+  calcPortion();
+  document.getElementById('itemPortion').focus();
+}
+
+// --- Init ---
+document.addEventListener('DOMContentLoaded', function() {
+  pruneLog();
+  render();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+});
+</script>
+</body>
+</html>
