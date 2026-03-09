@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Probabilistic Simulation for QA - Dmitry&#39;s Notes</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Probabilistic Simulation for QA - El rincón del introvertido</title><meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<meta property="og:description" content="Solving hard problems by doing experiments on your computer. How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting." />
 	<meta name="twitter:description" content="Solving hard problems by doing experiments on your computer. How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting." />
 	<meta name="description" content="Solving hard problems by doing experiments on your computer. How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting." />
 	<meta name="description" content="Solving hard problems by doing experiments on your computer. How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting." />
 
-	<meta property="og:title" content="Probabilistic Simulation for QA | Dmitry&#39;s Notes" />
-	<meta name="twitter:title" content="Probabilistic Simulation for QA | Dmitry&#39;s Notes" />
+	<meta property="og:title" content="Probabilistic Simulation for QA | El rincón del introvertido" />
+	<meta name="twitter:title" content="Probabilistic Simulation for QA | El rincón del introvertido" />
 
 	<meta property="og:image" content=""/>
-	<meta itemprop="name" content="Probabilistic Simulation for QA | Dmitry&#39;s Notes" />
-	<meta name="application-name" content="Probabilistic Simulation for QA | Dmitry&#39;s Notes" />
+	<meta itemprop="name" content="Probabilistic Simulation for QA | El rincón del introvertido" />
+	<meta name="application-name" content="Probabilistic Simulation for QA | El rincón del introvertido" />
 	<meta property="og:site_name" content="" />
 	<meta property="og:url" content="https://mylh.me/posts/txn-backtesting/">
-  <meta property="og:site_name" content="Dmitry&#39;s Notes">
+  <meta property="og:site_name" content="El rincón del introvertido">
   <meta property="og:title" content="Probabilistic Simulation for QA">
   <meta property="og:description" content="Solving hard problems by doing experiments on your computer. How many tests we need to run to be sure that there are no errors introduced because of changes we made? This is the question we are going to answer using probabilistic simulations. Real life example from my work. We did it for TXN backtesting.">
   <meta property="og:locale" content="en_us">
@@ -37,7 +37,7 @@
 </head><body>
         <div class="content"><header>
 	<div class="main">
-		<a href="https://mylh.me/">Dmitry&#39;s Notes</a>
+		<a href="https://mylh.me/">El rincón del introvertido</a>
 	</div>
 	<nav>
 		
@@ -85,10 +85,10 @@
 </ul>
 <p>We are going to run our backtesting simulation: we will randomly choose elements from our checks and see if there are any broken ones. We run this procedure many times and the calculate ratio of how many times we successfully
 detected broken checks to the total number of runs. This will be our probability of detecting bugs via backtesting.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
 </span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>matplotlib inline
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># experiment</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># experiment</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">simulate</span>(total_checks, num_errors, backtest, num_experiments<span style="color:#f92672">=</span><span style="color:#ae81ff">10000</span>):
 </span></span><span style="display:flex;"><span>    checks <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(total_checks)
 </span></span><span style="display:flex;"><span>    checks[:num_errors] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># errors</span>
@@ -99,7 +99,7 @@ detected broken checks to the total number of runs. This will be our probability
 </span></span><span style="display:flex;"><span>        errors_detected <span style="color:#f92672">+=</span> sum(X) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> errors_detected <span style="color:#f92672">/</span> num_experiments
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
 </span></span><span style="display:flex;"><span>M <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># 1 means only 1 check fails in new version</span>
 </span></span><span style="display:flex;"><span>backtest_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
 </span></span><span style="display:flex;"><span>simulate(N, M, backtest_size)
@@ -107,40 +107,40 @@ detected broken checks to the total number of runs. This will be our probability
 </code></pre>
 <p>So what we have here is the probability of detecting an error running backtest on 100 checks out of 1852 in case there is a single error in all checks.</p>
 <p>Let&rsquo;s see how this probability changes if we increase the number of checks we are backtesting</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> backtest_size <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1852</span>, <span style="color:#ae81ff">100</span>):
 </span></span><span style="display:flex;"><span>    x<span style="color:#f92672">.</span>append(backtest_size)
 </span></span><span style="display:flex;"><span>    y<span style="color:#f92672">.</span>append(simulate(N, <span style="color:#ae81ff">1</span>, backtest_size))
 </span></span></code></pre></div><p>let&rsquo;s see it on a graph</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0.9</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
 </span></span></code></pre></div><p><img src="output_8_0.png" alt="png"></p>
 <p>So we can see that to catch a single error with probability more than 90% we need to backtest almost all checks.</p>
 <p>This was very specific edge case when error occurs only in a single check. In reality when we introduce an error in the new version of software usually many checks got broken. How to estimate?</p>
 <p>Our checks consist of a number of steps and each step can be only of a certain type. There are only 26 different step types. Let&rsquo;s assume we&rsquo;ve introduced an error only in 1 step and that all steps are uniformly distributes over all checks we have (in reality of course there are popular and less popular steps), then the number of broken checks will be N/26</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M <span style="color:#f92672">=</span> N <span style="color:#f92672">//</span> <span style="color:#ae81ff">26</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M <span style="color:#f92672">=</span> N <span style="color:#f92672">//</span> <span style="color:#ae81ff">26</span>
 </span></span><span style="display:flex;"><span>M
 </span></span></code></pre></div><pre><code>76
 </code></pre>
 <p>Let&rsquo;s run our simulation again with the new number of failed checks</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> backtest_size <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>, N, <span style="color:#ae81ff">100</span>):
 </span></span><span style="display:flex;"><span>    x<span style="color:#f92672">.</span>append(backtest_size)
 </span></span><span style="display:flex;"><span>    y<span style="color:#f92672">.</span>append(simulate(N, M, backtest_size, num_experiments<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>))
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
 </span></span></code></pre></div><p><img src="output_13_0.png" alt="png"></p>
 <p>We see that at <strong>100 checks we have more than 95% probability</strong> of detecting a failure, when there is an error on any step that affects all checks. Thinking a bit we realize that this number is also not very practical. There are errors that can affect checks partially. So we need to come up with another condition.</p>
 <p>Since we really care about false alarms we can set a reasonable threshold of how many false alarms are acceptable and manageable by our support department. After internal consultations we decided that 1% of false alarms is OK for us. Let see what numbers this gives us.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M <span style="color:#f92672">=</span> int(N <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.01</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M <span style="color:#f92672">=</span> int(N <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.01</span>)
 </span></span><span style="display:flex;"><span>M
 </span></span></code></pre></div><pre><code>20
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> backtest_size <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>, N, <span style="color:#ae81ff">100</span>):
 </span></span><span style="display:flex;"><span>    x<span style="color:#f92672">.</span>append(backtest_size)
@@ -151,7 +151,7 @@ detected broken checks to the total number of runs. This will be our probability
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
 </span></span></code></pre></div><p><img src="output_16_0.png" alt="png"></p>
 <p>We see that between 250 and 500 checks we achieve the desired level of confidence. Let&rsquo;s write a function that can find the number more precisely by running several simulations adjusting backtest size on each iteration to make our probability to be close to the desired confidence value with defined precision</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sample_size_finder</span>(N, M, start<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, confidence<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, prescision<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>, num_experiments<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, verbose<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sample_size_finder</span>(N, M, start<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, confidence<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, prescision<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>, num_experiments<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, verbose<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
 </span></span><span style="display:flex;"><span>    delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">-</span> confidence
 </span></span><span style="display:flex;"><span>    prev_delta <span style="color:#f92672">=</span> delta
 </span></span><span style="display:flex;"><span>    backtest_size <span style="color:#f92672">=</span> start
@@ -196,11 +196,11 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 300
 </code></pre>
 <p>What percent of initial population is it?</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">300</span> <span style="color:#f92672">/</span> M
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">300</span> <span style="color:#f92672">/</span> M
 </span></span></code></pre></div><pre><code>15.0
 </code></pre>
 <p>Let&rsquo;s explore how backtest size changes when total numbed of checks changes, but the desired percent of failed checks stays constant and equal 1%</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Pool, cpu_count
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> []
@@ -312,7 +312,7 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 </div>
 <p>Interesting - appears that number of checks we need to test doesn&rsquo;t changes at all and after 300 checks we can be sure that no more than 1% of total checks can fail.</p>
 <p>Now lets keep constant absolute number of checks we allow to fail and see how our sample size changes</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Pool, cpu_count
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> []
@@ -423,7 +423,7 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 </table>
 </div>
 <p>Let&rsquo;s look at 1 million checks, how many checks we need to backtest to make sure only 20 can fail, guessing that according with previous result the number should be around 15%</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> backtest_size <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10_000</span>, <span style="color:#ae81ff">200_000</span>, <span style="color:#ae81ff">50_000</span>):
 </span></span><span style="display:flex;"><span>    x<span style="color:#f92672">.</span>append(backtest_size)
@@ -434,11 +434,11 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
 </span></span></code></pre></div><p><img src="output_26_0.png" alt="png"></p>
 <p>Yes, looks like again we need to test around 15% of the population. Let&rsquo;s now do a simulation with 20 errors and 15% of backtest sample size for different total checks numbers:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10_000</span>, <span style="color:#ae81ff">100_000</span>, <span style="color:#ae81ff">5000</span>):
 </span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> simulate(n, <span style="color:#ae81ff">20</span>, int(n<span style="color:#f92672">*</span><span style="color:#ae81ff">0.15</span>))
 </span></span><span style="display:flex;"><span>    res<span style="color:#f92672">.</span>append((n, p))
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(res, columns<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;Probability&#39;</span>))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(res, columns<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;Probability&#39;</span>))
 </span></span><span style="display:flex;"><span>df
 </span></span></code></pre></div><div>
 <style scoped>
@@ -556,7 +556,7 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
   </tbody>
 </table>
 </div>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100_000</span>, <span style="color:#ae81ff">1_000_000</span>, <span style="color:#ae81ff">100_000</span>):
 </span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> simulate(n, <span style="color:#ae81ff">20</span>, int(n<span style="color:#f92672">*</span><span style="color:#ae81ff">0.15</span>))
 </span></span><span style="display:flex;"><span>    res<span style="color:#f92672">.</span>append((n, p))
@@ -660,7 +660,7 @@ Result prob=0.953 with 300 backtest size, delta=0.0030000000000000027
 </main>
 <footer>
 <hr><a class="soc" href="https://twitter.com/dima7" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc" href="https://github.com/mylh" title="GitHub"><i data-feather="github"></i></a>|⚡️
-	2024  © Dmitry Mylh |  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+	2026  © Dmitry Mylh |  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
 </footer><script>
       feather.replace()
 </script></div>
