@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ccnt-v1';
+const CACHE_NAME = 'ccnt-v2';
 const APP_SHELL = [
   './',
   './index.html',
@@ -28,8 +28,12 @@ self.addEventListener('fetch', e => {
   // Network-only for API calls
   if (url.hostname.includes('openfoodfacts.org')) return;
 
-  // Cache-first for app shell
+  // Network-first for app shell, fall back to cache when offline
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    fetch(e.request).then(r => {
+      const clone = r.clone();
+      caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+      return r;
+    }).catch(() => caches.match(e.request))
   );
 });
