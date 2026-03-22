@@ -25,6 +25,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-
 .progress-yellow { background: #ff9800; }
 .progress-red { background: #f44336; }
 
+/* Filter */
+.filter-wrap { padding: 8px 8px 0; position: relative; }
+.filter-wrap input { width: 100%; padding: 10px 36px 10px 12px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 15px; background: #fff; outline: none; }
+.filter-wrap input:focus { border-color: #1976d2; }
+.filter-clear { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 20px; color: #888; cursor: pointer; display: none; padding: 4px 8px; margin-top: 4px; }
+
 /* Food list */
 .food-list { flex: 1; padding: 8px; }
 .food-item { background: #fff; border-radius: 10px; margin-bottom: 6px; display: flex; align-items: center; padding: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -92,6 +98,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-
     <button class="edit-limit-btn" onclick="openSettingsModal()" title="Settings">&#9881;</button>
   </div>
   <div class="progress-wrap"><div class="progress-bar progress-green" id="progressBar"></div></div>
+</div>
+
+<div class="filter-wrap">
+  <input type="text" id="filterInput" placeholder="Filter items..." oninput="render()">
+  <button class="filter-clear" id="filterClear" onclick="document.getElementById('filterInput').value='';render();">&times;</button>
 </div>
 
 <div class="food-list" id="foodList"></div>
@@ -211,6 +222,34 @@ function pruneLog() {
 }
 
 // --- Core Logic ---
+let sortedItemIds = [];
+function sortItemsByFrequency() {
+  const items = getItems();
+  const log = getLog();
+  const currentHour = new Date().getHours();
+  const TIME_WINDOW = 2; // ±2 hours
+  const TIME_WEIGHT = 0.6;
+
+  const totalFreq = {};
+  const timeFreq = {};
+  log.forEach(e => {
+    totalFreq[e.itemId] = (totalFreq[e.itemId] || 0) + 1;
+    const hour = new Date(e.timestamp).getHours();
+    const diff = Math.abs(hour - currentHour);
+    const hourDist = Math.min(diff, 24 - diff);
+    if (hourDist <= TIME_WINDOW) {
+      timeFreq[e.itemId] = (timeFreq[e.itemId] || 0) + 1;
+    }
+  });
+
+  items.sort((a, b) => {
+    const scoreA = TIME_WEIGHT * (timeFreq[a.id] || 0) + (1 - TIME_WEIGHT) * (totalFreq[a.id] || 0);
+    const scoreB = TIME_WEIGHT * (timeFreq[b.id] || 0) + (1 - TIME_WEIGHT) * (totalFreq[b.id] || 0);
+    return scoreB - scoreA;
+  });
+  sortedItemIds = items.map(i => i.id);
+}
+
 const MERGE_WINDOW = 10 * 60 * 1000; // 10 minutes
 
 function addPortion(itemId) {
@@ -287,10 +326,12 @@ function getTodayCaloriesForItem(itemId) {
 function render() {
   const settings = getSettings();
   const items = getItems();
-  const log = getLog();
-  const freq = {};
-  log.forEach(e => { freq[e.itemId] = (freq[e.itemId] || 0) + 1; });
-  items.sort((a, b) => (freq[b.id] || 0) - (freq[a.id] || 0));
+  const itemMap = new Map(items.map(i => [i.id, i]));
+  const sorted = sortedItemIds.filter(id => itemMap.has(id)).map(id => itemMap.get(id));
+  items.forEach(i => { if (!sortedItemIds.includes(i.id)) sorted.push(i); });
+  const filterVal = document.getElementById('filterInput').value.toLowerCase();
+  const filtered = filterVal ? sorted.filter(i => i.name.toLowerCase().includes(filterVal)) : sorted;
+  document.getElementById('filterClear').style.display = filterVal ? 'block' : 'none';
   const current = getTodayCalories();
   const limit = settings.dailyLimit;
   const pct = limit > 0 ? (current / limit) * 100 : 0;
@@ -303,12 +344,14 @@ function render() {
   bar.className = 'progress-bar ' + (pct > 100 ? 'progress-red' : pct >= 80 ? 'progress-yellow' : 'progress-green');
 
   const list = document.getElementById('foodList');
-  if (items.length === 0) {
-    list.innerHTML = '<div style="text-align:center;padding:40px 16px;color:#aaa;">No food items yet.<br>Tap "+ Add New Item" to start.</div>';
+  if (filtered.length === 0) {
+    list.innerHTML = filterVal
+      ? '<div style="text-align:center;padding:40px 16px;color:#aaa;">No matching items.</div>'
+      : '<div style="text-align:center;padding:40px 16px;color:#aaa;">No food items yet.<br>Tap "+ Add New Item" to start.</div>';
     return;
   }
 
-  list.innerHTML = items.map(item => {
+  list.innerHTML = filtered.map(item => {
     const todayP = getTodayPortions(item.id);
     const todayCal = getTodayCaloriesForItem(item.id);
     const todayLine = todayP > 0 ? `<div class="food-today">${todayP} &times; ${item.caloriesPerPortion} = ${todayCal} kcal</div>` : '';
@@ -528,6 +571,7 @@ function fillFromSearch(name, cal100) {
 // --- Init ---
 document.addEventListener('DOMContentLoaded', function() {
   pruneLog();
+  sortItemsByFrequency();
   render();
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
