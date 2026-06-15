@@ -409,17 +409,16 @@ function render() {
     </div>`;
   }).join('');
 
-  renderKeyboard();
+  renderKeyboard(filtered);
 }
 
-function renderKeyboard() {
+function renderKeyboard(filtered) {
   const prefix = document.getElementById('filterInput').value.toLowerCase();
-  const items = getItems();
   const pos = prefix.length;
   const freq = {};
-  items.forEach(item => {
+  filtered.forEach(item => {
     const name = item.name.toLowerCase();
-    if (name.startsWith(prefix) && name.length > pos) {
+    if (name.length > pos) {
       const ch = name[pos];
       freq[ch] = (freq[ch] || 0) + 1;
     }
