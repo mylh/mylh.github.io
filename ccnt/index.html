@@ -369,7 +369,11 @@ function render() {
   const sorted = sortedItemIds.filter(id => itemMap.has(id)).map(id => itemMap.get(id));
   items.forEach(i => { if (!sortedItemIds.includes(i.id)) sorted.push(i); });
   const filterVal = document.getElementById('filterInput').value.toLowerCase();
-  const filtered = filterVal ? sorted.filter(i => i.name.toLowerCase().includes(filterVal)) : sorted;
+  const filtered = filterVal ? sorted.filter(i => i.name.toLowerCase().includes(filterVal)).sort((a, b) => {
+    const aStarts = a.name.toLowerCase().startsWith(filterVal) ? 0 : 1;
+    const bStarts = b.name.toLowerCase().startsWith(filterVal) ? 0 : 1;
+    return aStarts - bStarts;
+  }) : sorted;
   document.getElementById('filterClear').style.display = filterVal ? 'block' : 'none';
   const current = getTodayCalories();
   const limit = settings.dailyLimit;
